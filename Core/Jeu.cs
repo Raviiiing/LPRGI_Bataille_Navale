@@ -46,7 +46,7 @@ public class Jeu
             throw new Exception("Failed to deserialize JSON string to dynamic object.", ex);
         }
     }
-    private bool PeutPlacer(Cellule[,] grille, Bateau bateau, int x, int y, Direction direction, bool apercu = false)
+    public bool PeutPlacer(Cellule[,] grille, Bateau bateau, int x, int y, Direction direction, bool apercu = false)
     {
         if (bateau == null) throw new ArgumentNullException(nameof(bateau));
 
@@ -61,7 +61,6 @@ public class Jeu
                     for (var t = 0; t < bateau.Taille; t++)
                         if (grille[x + t, y].Bateau != null)
                             return false;
-
                 break;
 
             case Direction.Horizontal:
@@ -73,13 +72,11 @@ public class Jeu
                     for (var t = 0; t < bateau.Taille; t++)
                         if (grille[x, y + t].Bateau != null)
                             return false;
-
                 break;
 
             default:
                 throw new ArgumentException("Direction inconnue", nameof(direction));
         }
-
         return true;
     }
 
@@ -96,7 +93,7 @@ public class Jeu
         }
     }
 
-    private void PlacerBateau(Cellule[,] grille, Bateau bateau, int x, int y, Direction direction)
+    public void PlacerBateau(Cellule[,] grille, Bateau bateau, int x, int y, Direction direction)
     {
         switch (direction)
         {
@@ -123,7 +120,7 @@ public class Jeu
         return grille;
     }
 
-    private void AfficherApercuBateau(Cellule[,] grille, Bateau bateau, int x, int y, Direction direction)
+    public void AfficherApercuBateau(Cellule[,] grille, Bateau bateau, int x, int y, Direction direction)
     {
         for (var i = 0; i < grille.GetLength(1); i++)
         {
@@ -168,7 +165,7 @@ public class Jeu
         }
     }
 
-    private void UtilisateurPlaceBateau(Bateau bateau, Cellule[,] grille)
+    public void UtilisateurPlaceBateau(Bateau bateau, Cellule[,] grille)
     {
         var continuer = true;
         int posX = 0, posY = 0;
@@ -242,7 +239,7 @@ public class Jeu
         }
     }
 
-    private void JoueurToucheCellule(Joueur joueur)
+    public void JoueurToucheCellule(Joueur joueur)
     {
         var grille = joueur.Grille;
         var continuer = true;
@@ -301,7 +298,7 @@ public class Jeu
         return y >= 0 && y < grille.GetLength(0) && x >= 0 && x < grille.GetLength(1);
     }
 
-    private void AfficherGrilleToucheAvecMissile(Cellule[,] grille, int xMissile, int yMissile)
+    public void AfficherGrilleToucheAvecMissile(Cellule[,] grille, int xMissile, int yMissile)
     {
         for (var i = 0; i < grille.GetLength(0); i++)
         {
@@ -349,7 +346,7 @@ public class Jeu
         }
     }
     
-    private bool JoueurAGagne(Joueur joueur)
+    public bool JoueurAGagne(Joueur joueur)
     {
         var grille = joueur.Grille;
         foreach (var cellule in grille)
