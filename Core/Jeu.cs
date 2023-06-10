@@ -4,15 +4,18 @@ using System;
 
 namespace Core;
 
+
+
 public class Jeu
-{
+{   
+
     public List<Bateau> bateaux;
 
     public int nbColonnes;
     public int nbLignes;
 
 
-    private async Task GetConfig()
+    public async Task GetConfig()
     {
         var api = new Api("https://api-lprgi.natono.biz/api/GetConfig", "lprgi_api_key_2023");
         try
@@ -244,11 +247,13 @@ public class Jeu
         var grille = joueur.Grille;
         var continuer = true;
         int posX = 0, posY = 0;
+        
         do
         {
             ConsoleLogger.Log(joueur.Nom +  " Placez votre missile prédator air sol v12 Kim Jong Un:", LogLevel.Info);
             ConsoleLogger.Log("Utilisez les flèches pour déplacer le missile et Espace pour valider", LogLevel.Info);
             AfficherGrilleToucheAvecMissile(grille, posX, posY);
+            
             var key = Console.ReadKey(true);
             
             switch (key.Key)
